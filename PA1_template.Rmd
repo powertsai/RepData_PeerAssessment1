@@ -31,7 +31,8 @@ repro.data <- activity.data %>%
 sapply(repro.data, class)
 head(repro.data[which(repro.data$is.weekend), ])
 ```
-## What is mean total number of steps taken per day?
+## What is mean total number of steps taken per day?  
+  
 1. Calculate the total number of steps taken per day
 ```{r}
 summary.data <- repro.data %>%
@@ -47,8 +48,11 @@ ggplot(summary.data, aes(x=date,y=total.step, fill=factor(wday)))  +
       geom_bar(stat="identity")  +
          labs(title = "Total number of steps taken each day")
 ```
+  
 1. Calculate and report the mean and median of the total number of steps taken per day  
-1. the mean of the total number of steps taken per day is  
+
+1. the mean of the total number of steps taken per day is   
+
 ```{r}
 (mean.total.step <- mean(summary.data$total.step, na.rm =  TRUE))
 ```
@@ -71,6 +75,7 @@ ggplot(summary.interval.data, aes(x=interval,y=mean.step) ) +
   geom_line(stat="identity") +
   labs(title = "average number of steps by 5-minute interval")
 ```
+
 1. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 ```{r}
@@ -155,6 +160,7 @@ ggplot(imputing.summary.data, aes(x=date,y=total.step, fill=factor(wday)))  +
       geom_bar(stat="identity") +
       labs(title = "Total number of steps taken each day by imputing missing data")
 ```
+  
 1. Calculate and report the mean and median of the total number of steps taken per day  
 
 #### After imputing missing values:  

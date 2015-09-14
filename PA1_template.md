@@ -71,7 +71,8 @@ head(repro.data[which(repro.data$is.weekend), ])
 ## 1445     0 2012-10-06       20    周六    6       TRUE
 ## 1446     0 2012-10-06       25    周六    6       TRUE
 ```
-## What is mean total number of steps taken per day?
+## What is mean total number of steps taken per day?  
+  
 1. Calculate the total number of steps taken per day
 
 ```r
@@ -109,8 +110,11 @@ ggplot(summary.data, aes(x=date,y=total.step, fill=factor(wday)))  +
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+  
 1. Calculate and report the mean and median of the total number of steps taken per day  
-1. the mean of the total number of steps taken per day is  
+
+1. the mean of the total number of steps taken per day is   
+
 
 ```r
 (mean.total.step <- mean(summary.data$total.step, na.rm =  TRUE))
@@ -147,6 +151,7 @@ ggplot(summary.interval.data, aes(x=interval,y=mean.step) ) +
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-9-1.png) 
+
 1. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 
@@ -294,6 +299,7 @@ ggplot(imputing.summary.data, aes(x=date,y=total.step, fill=factor(wday)))  +
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-18-1.png) 
+  
 1. Calculate and report the mean and median of the total number of steps taken per day  
 
 #### After imputing missing values:  
