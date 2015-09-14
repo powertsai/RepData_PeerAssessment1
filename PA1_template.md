@@ -1,4 +1,9 @@
-# Reproducible Research: Peer Assessment 1
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
 
 
 ## Loading and preprocessing the data
@@ -29,22 +34,6 @@ summary(activity.data)
 
 ```r
 library(dplyr)
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-## 
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 repro.data <- activity.data %>%
    mutate(date = as.Date(date, format="%Y-%m-%d")) %>%
    mutate(weekday = weekdays(date)) %>% 
@@ -108,7 +97,7 @@ ggplot(summary.data, aes(x=date,y=total.step, fill=factor(wday)))  +
          labs(title = "Total number of steps taken each day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 1. Calculate and report the mean and median of the total number of steps taken per day
 1. the mean of the total number of steps taken per day is
 
@@ -146,7 +135,7 @@ ggplot(summary.interval.data, aes(x=interval,y=mean.step) ) +
   labs(title = "average number of steps by 5-minute interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png) 
+![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 
 1. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 
@@ -293,7 +282,7 @@ ggplot(imputing.summary.data, aes(x=date,y=total.step, fill=factor(wday)))  +
       labs(title = "Total number of steps taken each day by imputing missing data")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-18-1.png) 
+![plot of chunk unnamed-chunk-18](figure/unnamed-chunk-18-1.png) 
 1. Calculate and report the mean and median of the total number of steps taken per day  
 #### After imputing missing values:
 1. the mean of the total number of steps taken per day is  
@@ -367,4 +356,4 @@ ggplot(final.summary.data, aes(x=interval,y=mean.step)) +
         labs(title = "average number of steps by 5-minute interval")
 ```
 
-![](PA1_template_files/figure-html/finalplot-1.png) 
+![plot of chunk finalplot](figure/finalplot-1.png) 
