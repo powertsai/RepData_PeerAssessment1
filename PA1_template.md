@@ -1,9 +1,4 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 ## Loading and preprocessing the data
@@ -34,6 +29,22 @@ summary(activity.data)
 
 ```r
 library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+## 
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
 repro.data <- activity.data %>%
    mutate(date = as.Date(date, format="%Y-%m-%d")) %>%
    mutate(weekday = weekdays(date)) %>% 
@@ -97,9 +108,9 @@ ggplot(summary.data, aes(x=date,y=total.step, fill=factor(wday)))  +
          labs(title = "Total number of steps taken each day")
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
-1. Calculate and report the mean and median of the total number of steps taken per day
-1. the mean of the total number of steps taken per day is
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+1. Calculate and report the mean and median of the total number of steps taken per day  
+1. the mean of the total number of steps taken per day is  
 
 ```r
 (mean.total.step <- mean(summary.data$total.step, na.rm =  TRUE))
@@ -108,7 +119,7 @@ ggplot(summary.data, aes(x=date,y=total.step, fill=factor(wday)))  +
 ```
 ## [1] 9354.23
 ```
-the median of the total number of steps taken per day is
+the median of the total number of steps taken per day is  
 
 ```r
 (median.total.step <-median((summary.data$total.step), na.rm =  TRUE))
@@ -127,7 +138,7 @@ summary.interval.data <- repro.data %>%
   summarise(total.step = sum(steps, na.rm= TRUE), 
             mean.step = mean(steps, na.rm = TRUE))
 ```
-1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
+1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)   
 
 ```r
 ggplot(summary.interval.data, aes(x=interval,y=mean.step) ) +
@@ -135,7 +146,7 @@ ggplot(summary.interval.data, aes(x=interval,y=mean.step) ) +
   labs(title = "average number of steps by 5-minute interval")
 ```
 
-![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-9-1.png) 
 1. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 
@@ -162,7 +173,7 @@ summary(repro.data[, 1:3])
 ##  Max.   :806.00   Max.   :2012-11-30   Max.   :2355.0  
 ##  NA's   :2304
 ```
-1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
+1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)  
 
 ```r
 miss.rows.cnt <- dim(repro.data)[1] -  sum(complete.cases(repro.data))
@@ -171,14 +182,14 @@ total number of rows with NAs is 2304
 
 
 2. Devise a strategy for filling in all of the missing values in the dataset. 
-summarise data to get the mean for that 5-minute interval on weekday/weekend.
+summarise data to get the mean for that 5-minute interval on weekday/weekend.  
 
 ```r
 summary.interval_weekend.data <- repro.data %>%
         group_by(interval, is.weekend) %>%
         summarise(mean.step = mean(steps, na.rm=TRUE))
 ```
-function to fill missing value by mean of 5-minute interval on weekday/weenend
+function to fill missing value by mean of 5-minute interval on weekday/weenend  
 
 ```r
 getSteps <- function (data, summarydata) {  
@@ -193,8 +204,8 @@ getSteps <- function (data, summarydata) {
         }
 }
 ```
-3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
-subset data with missing value 
+3. Create a new dataset that is equal to the original dataset but with the missing data filled in.  
+subset data with missing value   
 
 ```r
 steps.missing.data <- subset(repro.data, is.na(steps))
@@ -221,7 +232,7 @@ subset(steps.missing.data, interval=="0")
 ## 12673 2.333333 2012-11-14        0    周三    3      FALSE
 ## 17281 2.333333 2012-11-30        0    周五    5      FALSE
 ```
-combine data with steps and data missing data filled with mean step by 
+combine data with steps and data missing data filled with mean step by  
 
 ```r
 # combine repro data 
@@ -246,7 +257,7 @@ head(imputing.data)
 
 4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. 
 
-1. Calculate the total number of steps taken per day
+1. Calculate the total number of steps taken per day  
 
 ```r
 imputing.summary.data <- imputing.data %>%
@@ -273,7 +284,7 @@ imputing.summary.data
 ## 10 2012-10-10    3    9900.00
 ## ..        ...  ...        ...
 ```
-1. Make a histogram of the total number of steps taken each day
+1. Make a histogram of the total number of steps taken each day  
 
 ```r
 library(ggplot2)
@@ -282,9 +293,10 @@ ggplot(imputing.summary.data, aes(x=date,y=total.step, fill=factor(wday)))  +
       labs(title = "Total number of steps taken each day by imputing missing data")
 ```
 
-![plot of chunk unnamed-chunk-18](figure/unnamed-chunk-18-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-18-1.png) 
 1. Calculate and report the mean and median of the total number of steps taken per day  
-#### After imputing missing values:
+
+#### After imputing missing values:  
 1. the mean of the total number of steps taken per day is  
 
 ```r
@@ -356,4 +368,4 @@ ggplot(final.summary.data, aes(x=interval,y=mean.step)) +
         labs(title = "average number of steps by 5-minute interval")
 ```
 
-![plot of chunk finalplot](figure/finalplot-1.png) 
+![](PA1_template_files/figure-html/finalplot-1.png) 
