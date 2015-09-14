@@ -361,9 +361,10 @@ final.summary.data
 ```
 
 ```r
-ggplot(final.summary.data, aes(x=interval,y=mean.step, col= factor.week.day)) +
-  geom_line(stat="identity") +
-  labs(title = "average number of steps by 5-minute interval on weekend/weekday")
+ggplot(final.summary.data, aes(x=interval,y=mean.step)) +
+        geom_line(stat="identity") +
+        facet_wrap( ~ factor.week.day, ncol=1) +
+        labs(title = "average number of steps by 5-minute interval")
 ```
 
 ![](PA1_template_files/figure-html/finalplot-1.png) 
